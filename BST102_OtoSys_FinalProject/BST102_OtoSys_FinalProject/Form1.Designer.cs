@@ -48,24 +48,24 @@
             // lblPlaka
             // 
             lblPlaka.AutoSize = true;
-            lblPlaka.Location = new Point(52, 109);
+            lblPlaka.Location = new Point(24, 15);
             lblPlaka.Name = "lblPlaka";
-            lblPlaka.Size = new Size(35, 15);
+            lblPlaka.Size = new Size(54, 15);
             lblPlaka.TabIndex = 0;
-            lblPlaka.Text = "Plaka";
+            lblPlaka.Text = "Şase NO:";
             lblPlaka.Click += label1_Click;
             // 
             // txtPlaka
             // 
-            txtPlaka.Location = new Point(112, 101);
+            txtPlaka.Location = new Point(84, 12);
             txtPlaka.Name = "txtPlaka";
-            txtPlaka.Size = new Size(100, 23);
+            txtPlaka.Size = new Size(121, 23);
             txtPlaka.TabIndex = 1;
             // 
             // lblMarka
             // 
             lblMarka.AutoSize = true;
-            lblMarka.Location = new Point(48, 158);
+            lblMarka.Location = new Point(38, 67);
             lblMarka.Name = "lblMarka";
             lblMarka.Size = new Size(40, 15);
             lblMarka.TabIndex = 2;
@@ -75,7 +75,7 @@
             // lblModel
             // 
             lblModel.AutoSize = true;
-            lblModel.Location = new Point(46, 208);
+            lblModel.Location = new Point(37, 126);
             lblModel.Name = "lblModel";
             lblModel.Size = new Size(41, 15);
             lblModel.TabIndex = 3;
@@ -83,23 +83,23 @@
             // 
             // txtMarka
             // 
-            txtMarka.Location = new Point(112, 150);
+            txtMarka.Location = new Point(84, 64);
             txtMarka.Name = "txtMarka";
-            txtMarka.Size = new Size(100, 23);
+            txtMarka.Size = new Size(121, 23);
             txtMarka.TabIndex = 4;
             // 
             // txtModel
             // 
-            txtModel.Location = new Point(112, 200);
+            txtModel.Location = new Point(84, 123);
             txtModel.Name = "txtModel";
-            txtModel.Size = new Size(100, 23);
+            txtModel.Size = new Size(121, 23);
             txtModel.TabIndex = 5;
             txtModel.TextChanged += txtModel_TextChanged;
             // 
             // lblTur
             // 
             lblTur.AutoSize = true;
-            lblTur.Location = new Point(52, 247);
+            lblTur.Location = new Point(53, 190);
             lblTur.Name = "lblTur";
             lblTur.Size = new Size(25, 15);
             lblTur.TabIndex = 6;
@@ -108,7 +108,7 @@
             // cmbTur
             // 
             cmbTur.FormattingEnabled = true;
-            cmbTur.Location = new Point(91, 244);
+            cmbTur.Location = new Point(84, 187);
             cmbTur.Name = "cmbTur";
             cmbTur.Size = new Size(121, 23);
             cmbTur.TabIndex = 7;
@@ -116,7 +116,7 @@
             // lblGirisTarihi
             // 
             lblGirisTarihi.AutoSize = true;
-            lblGirisTarihi.Location = new Point(27, 293);
+            lblGirisTarihi.Location = new Point(18, 252);
             lblGirisTarihi.Name = "lblGirisTarihi";
             lblGirisTarihi.Size = new Size(60, 15);
             lblGirisTarihi.TabIndex = 8;
@@ -124,9 +124,9 @@
             // 
             // dtpGirisTarihi
             // 
-            dtpGirisTarihi.Location = new Point(91, 285);
+            dtpGirisTarihi.Location = new Point(84, 246);
             dtpGirisTarihi.Name = "dtpGirisTarihi";
-            dtpGirisTarihi.Size = new Size(200, 23);
+            dtpGirisTarihi.Size = new Size(121, 23);
             dtpGirisTarihi.TabIndex = 9;
             dtpGirisTarihi.ValueChanged += dtpGirisTarihi_ValueChanged;
             // 
@@ -134,45 +134,45 @@
             // 
             dgvAraclar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAraclar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAraclar.Location = new Point(298, 42);
+            dgvAraclar.Location = new Point(226, 12);
             dgvAraclar.Name = "dgvAraclar";
             dgvAraclar.ReadOnly = true;
             dgvAraclar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAraclar.Size = new Size(490, 309);
+            dgvAraclar.Size = new Size(562, 376);
             dgvAraclar.TabIndex = 10;
             // 
             // btnKaydet
             // 
-            btnKaydet.Location = new Point(13, 349);
+            btnKaydet.Location = new Point(24, 306);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(75, 23);
             btnKaydet.TabIndex = 11;
-            btnKaydet.Text = "Kaydet";
+            btnKaydet.Text = "Ara";
             btnKaydet.UseVisualStyleBackColor = true;
             // 
             // btnSil
             // 
-            btnSil.Location = new Point(112, 349);
+            btnSil.Location = new Point(117, 306);
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(75, 23);
             btnSil.TabIndex = 12;
-            btnSil.Text = "Sil";
+            btnSil.Text = "Temizle";
             btnSil.UseVisualStyleBackColor = true;
             // 
             // btnForm2
             // 
-            btnForm2.Location = new Point(216, 349);
+            btnForm2.Location = new Point(24, 351);
             btnForm2.Name = "btnForm2";
-            btnForm2.Size = new Size(75, 23);
+            btnForm2.Size = new Size(168, 23);
             btnForm2.TabIndex = 13;
-            btnForm2.Text = "Formu aç";
+            btnForm2.Text = "Bilgileri Güncelle";
             btnForm2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 404);
             Controls.Add(btnForm2);
             Controls.Add(btnSil);
             Controls.Add(btnKaydet);
@@ -188,7 +188,7 @@
             Controls.Add(txtPlaka);
             Controls.Add(lblPlaka);
             Name = "Form1";
-            Text = "Form1";
+            Text = "OtoSys - Araç Takip";
             ((System.ComponentModel.ISupportInitialize)dgvAraclar).EndInit();
             ResumeLayout(false);
             PerformLayout();
