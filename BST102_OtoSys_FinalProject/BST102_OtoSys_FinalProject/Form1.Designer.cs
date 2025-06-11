@@ -53,7 +53,6 @@
             lblPlaka.Size = new Size(54, 15);
             lblPlaka.TabIndex = 0;
             lblPlaka.Text = "Şase NO:";
-            lblPlaka.Click += label1_Click;
             // 
             // txtPlaka
             // 
@@ -70,7 +69,6 @@
             lblMarka.Size = new Size(40, 15);
             lblMarka.TabIndex = 2;
             lblMarka.Text = "Marka";
-            lblMarka.Click += label2_Click;
             // 
             // lblModel
             // 
@@ -94,7 +92,6 @@
             txtModel.Name = "txtModel";
             txtModel.Size = new Size(121, 23);
             txtModel.TabIndex = 5;
-            txtModel.TextChanged += txtModel_TextChanged;
             // 
             // lblTur
             // 
@@ -128,7 +125,6 @@
             dtpGirisTarihi.Name = "dtpGirisTarihi";
             dtpGirisTarihi.Size = new Size(121, 23);
             dtpGirisTarihi.TabIndex = 9;
-            dtpGirisTarihi.ValueChanged += dtpGirisTarihi_ValueChanged;
             // 
             // dgvAraclar
             // 

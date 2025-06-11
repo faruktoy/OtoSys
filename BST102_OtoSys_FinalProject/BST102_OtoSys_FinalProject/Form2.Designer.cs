@@ -150,7 +150,6 @@
             chkSatildimi2.Size = new Size(15, 14);
             chkSatildimi2.TabIndex = 12;
             chkSatildimi2.UseVisualStyleBackColor = true;
-            chkSatildimi2.CheckedChanged += chkSatildimi2_CheckedChanged;
             // 
             // btnGuncelle2
             // 
@@ -202,7 +201,6 @@
             Controls.Add(lblAracId);
             Name = "Form2";
             Text = "Güncelleme Formu";
-            Load += Form2_Load;
             ResumeLayout(false);
             PerformLayout();
         }
