@@ -16,5 +16,10 @@ namespace BST102_OtoSys_FinalProject
         {
             InitializeComponent();
         }
+
+        private void chkSatildimi2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
