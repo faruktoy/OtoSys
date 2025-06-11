@@ -36,12 +36,14 @@
             txtModel = new TextBox();
             lblTur = new Label();
             cmbTur = new ComboBox();
-            lblGirisTarihi = new Label();
-            dtpGirisTarihi = new DateTimePicker();
+            lblBaslangicTarihi = new Label();
+            dtpBaslangicTarihi = new DateTimePicker();
             dgvAraclar = new DataGridView();
             btnKaydet = new Button();
             btnSil = new Button();
             btnForm2 = new Button();
+            dtpBitisTarihi = new DateTimePicker();
+            lblBitisTarihi = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvAraclar).BeginInit();
             SuspendLayout();
             // 
@@ -96,11 +98,12 @@
             // lblTur
             // 
             lblTur.AutoSize = true;
-            lblTur.Location = new Point(53, 190);
+            lblTur.Location = new Point(38, 190);
             lblTur.Name = "lblTur";
             lblTur.Size = new Size(25, 15);
             lblTur.TabIndex = 6;
-            lblTur.Text = "Tur";
+            lblTur.Text = "Tür";
+            lblTur.Click += lblTur_Click;
             // 
             // cmbTur
             // 
@@ -110,21 +113,22 @@
             cmbTur.Size = new Size(121, 23);
             cmbTur.TabIndex = 7;
             // 
-            // lblGirisTarihi
+            // lblBaslangicTarihi
             // 
-            lblGirisTarihi.AutoSize = true;
-            lblGirisTarihi.Location = new Point(18, 252);
-            lblGirisTarihi.Name = "lblGirisTarihi";
-            lblGirisTarihi.Size = new Size(60, 15);
-            lblGirisTarihi.TabIndex = 8;
-            lblGirisTarihi.Text = "Giris tarihi";
+            lblBaslangicTarihi.AutoSize = true;
+            lblBaslangicTarihi.Location = new Point(46, 252);
+            lblBaslangicTarihi.Name = "lblBaslangicTarihi";
+            lblBaslangicTarihi.Size = new Size(87, 15);
+            lblBaslangicTarihi.TabIndex = 8;
+            lblBaslangicTarihi.Text = "Başlangıç tarihi";
+            lblBaslangicTarihi.Click += lblGirisTarihi_Click;
             // 
-            // dtpGirisTarihi
+            // dtpBaslangicTarihi
             // 
-            dtpGirisTarihi.Location = new Point(84, 246);
-            dtpGirisTarihi.Name = "dtpGirisTarihi";
-            dtpGirisTarihi.Size = new Size(121, 23);
-            dtpGirisTarihi.TabIndex = 9;
+            dtpBaslangicTarihi.Location = new Point(37, 270);
+            dtpBaslangicTarihi.Name = "dtpBaslangicTarihi";
+            dtpBaslangicTarihi.Size = new Size(121, 23);
+            dtpBaslangicTarihi.TabIndex = 9;
             // 
             // dgvAraclar
             // 
@@ -134,12 +138,12 @@
             dgvAraclar.Name = "dgvAraclar";
             dgvAraclar.ReadOnly = true;
             dgvAraclar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAraclar.Size = new Size(562, 376);
+            dgvAraclar.Size = new Size(562, 515);
             dgvAraclar.TabIndex = 10;
             // 
             // btnKaydet
             // 
-            btnKaydet.Location = new Point(24, 306);
+            btnKaydet.Location = new Point(24, 459);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(75, 23);
             btnKaydet.TabIndex = 11;
@@ -148,7 +152,7 @@
             // 
             // btnSil
             // 
-            btnSil.Location = new Point(117, 306);
+            btnSil.Location = new Point(117, 459);
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(75, 23);
             btnSil.TabIndex = 12;
@@ -157,25 +161,43 @@
             // 
             // btnForm2
             // 
-            btnForm2.Location = new System.Drawing.Point(24, 351);
+            btnForm2.Location = new Point(24, 504);
             btnForm2.Name = "btnForm2";
-            btnForm2.Size = new System.Drawing.Size(168, 23);
+            btnForm2.Size = new Size(168, 23);
             btnForm2.TabIndex = 13;
             btnForm2.Text = "Bilgileri Güncelle";
             btnForm2.UseVisualStyleBackColor = true;
-            btnForm2.Click += new System.EventHandler(this.btnForm2_Click); // Bu satırı ekleyin
+            btnForm2.Click += btnForm2_Click;
+            // 
+            // dtpBitisTarihi
+            // 
+            dtpBitisTarihi.Location = new Point(38, 351);
+            dtpBitisTarihi.Name = "dtpBitisTarihi";
+            dtpBitisTarihi.Size = new Size(121, 23);
+            dtpBitisTarihi.TabIndex = 15;
+            // 
+            // lblBitisTarihi
+            // 
+            lblBitisTarihi.AutoSize = true;
+            lblBitisTarihi.Location = new Point(64, 333);
+            lblBitisTarihi.Name = "lblBitisTarihi";
+            lblBitisTarihi.Size = new Size(59, 15);
+            lblBitisTarihi.TabIndex = 14;
+            lblBitisTarihi.Text = "Bitiş tarihi";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 404);
+            ClientSize = new Size(789, 539);
+            Controls.Add(dtpBitisTarihi);
+            Controls.Add(lblBitisTarihi);
             Controls.Add(btnForm2);
             Controls.Add(btnSil);
             Controls.Add(btnKaydet);
             Controls.Add(dgvAraclar);
-            Controls.Add(dtpGirisTarihi);
-            Controls.Add(lblGirisTarihi);
+            Controls.Add(dtpBaslangicTarihi);
+            Controls.Add(lblBaslangicTarihi);
             Controls.Add(cmbTur);
             Controls.Add(lblTur);
             Controls.Add(txtModel);
@@ -201,11 +223,13 @@
         private TextBox txtModel;
         private Label lblTur;
         private ComboBox cmbTur;
-        private Label lblGirisTarihi;
-        private DateTimePicker dtpGirisTarihi;
+        private Label lblBaslangicTarihi;
+        private DateTimePicker dtpBaslangicTarihi;
         private DataGridView dgvAraclar;
         private Button btnKaydet;
         private Button btnSil;
         private Button btnForm2;
+        private DateTimePicker dtpBitisTarihi;
+        private Label lblBitisTarihi;
     }
 }
