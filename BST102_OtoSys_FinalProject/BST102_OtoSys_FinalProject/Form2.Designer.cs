@@ -183,7 +183,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(250, 327);
+            ClientSize = new Size(266, 327);
             Controls.Add(btnIptal2);
             Controls.Add(label1);
             Controls.Add(btnGuncelle2);
@@ -202,6 +202,7 @@
             Controls.Add(lblAracId);
             Name = "Form2";
             Text = "Güncelleme Formu";
+            Load += Form2_Load;
             ResumeLayout(false);
             PerformLayout();
         }

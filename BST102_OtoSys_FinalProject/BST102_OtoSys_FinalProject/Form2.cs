@@ -12,12 +12,26 @@ namespace BST102_OtoSys_FinalProject
 {
     public partial class Form2 : Form
     {
+        // Form1'den gönderilecek araç verilerini tutacak public property'ler
+        public int AracId { get; set; }
+        public string Marka { get; set; }
+        public string Model { get; set; }
+        public int UretimAdedi { get; set; }
+        public decimal Maliyet { get; set; }
+        public decimal SatisTutari { get; set; }
+        public bool SatildiMi { get; set; }
+
         public Form2()
         {
             InitializeComponent();
         }
 
         private void chkSatildimi2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
         {
 
         }
