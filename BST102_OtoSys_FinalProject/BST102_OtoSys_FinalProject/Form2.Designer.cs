@@ -49,7 +49,7 @@
             // lblAracId
             // 
             lblAracId.AutoSize = true;
-            lblAracId.Location = new Point(79, 19);
+            lblAracId.Location = new Point(53, 35);
             lblAracId.Name = "lblAracId";
             lblAracId.Size = new Size(48, 15);
             lblAracId.TabIndex = 0;
@@ -57,28 +57,28 @@
             // 
             // txtİD2
             // 
-            txtİD2.Location = new Point(150, 16);
+            txtİD2.Location = new Point(107, 32);
             txtİD2.Name = "txtİD2";
             txtİD2.Size = new Size(100, 23);
             txtİD2.TabIndex = 1;
             // 
             // txtMarka2
             // 
-            txtMarka2.Location = new Point(150, 60);
+            txtMarka2.Location = new Point(107, 61);
             txtMarka2.Name = "txtMarka2";
             txtMarka2.Size = new Size(100, 23);
             txtMarka2.TabIndex = 2;
             // 
             // txtModel2
             // 
-            txtModel2.Location = new Point(150, 108);
+            txtModel2.Location = new Point(107, 90);
             txtModel2.Name = "txtModel2";
             txtModel2.Size = new Size(100, 23);
             txtModel2.TabIndex = 3;
             // 
             // txtUretimadedi2
             // 
-            txtUretimadedi2.Location = new Point(150, 151);
+            txtUretimadedi2.Location = new Point(107, 119);
             txtUretimadedi2.Name = "txtUretimadedi2";
             txtUretimadedi2.Size = new Size(100, 23);
             txtUretimadedi2.TabIndex = 4;
@@ -86,7 +86,7 @@
             // txtMarka
             // 
             txtMarka.AutoSize = true;
-            txtMarka.Location = new Point(84, 68);
+            txtMarka.Location = new Point(58, 64);
             txtMarka.Name = "txtMarka";
             txtMarka.Size = new Size(43, 15);
             txtMarka.TabIndex = 5;
@@ -95,7 +95,7 @@
             // txtModel
             // 
             txtModel.AutoSize = true;
-            txtModel.Location = new Point(89, 116);
+            txtModel.Location = new Point(57, 93);
             txtModel.Name = "txtModel";
             txtModel.Size = new Size(44, 15);
             txtModel.TabIndex = 6;
@@ -104,7 +104,7 @@
             // numUretimAdedi
             // 
             numUretimAdedi.AutoSize = true;
-            numUretimAdedi.Location = new Point(53, 159);
+            numUretimAdedi.Location = new Point(21, 122);
             numUretimAdedi.Name = "numUretimAdedi";
             numUretimAdedi.Size = new Size(80, 15);
             numUretimAdedi.TabIndex = 7;
@@ -113,7 +113,7 @@
             // txtMaliyet
             // 
             txtMaliyet.AutoSize = true;
-            txtMaliyet.Location = new Point(84, 199);
+            txtMaliyet.Location = new Point(52, 151);
             txtMaliyet.Name = "txtMaliyet";
             txtMaliyet.Size = new Size(49, 15);
             txtMaliyet.TabIndex = 8;
@@ -122,7 +122,7 @@
             // txtSatisTutari
             // 
             txtSatisTutari.AutoSize = true;
-            txtSatisTutari.Location = new Point(65, 239);
+            txtSatisTutari.Location = new Point(33, 180);
             txtSatisTutari.Name = "txtSatisTutari";
             txtSatisTutari.Size = new Size(68, 15);
             txtSatisTutari.TabIndex = 9;
@@ -130,14 +130,14 @@
             // 
             // txtMaliyet2
             // 
-            txtMaliyet2.Location = new Point(150, 191);
+            txtMaliyet2.Location = new Point(107, 148);
             txtMaliyet2.Name = "txtMaliyet2";
             txtMaliyet2.Size = new Size(100, 23);
             txtMaliyet2.TabIndex = 10;
             // 
             // txtSatisTutari2
             // 
-            txtSatisTutari2.Location = new Point(150, 231);
+            txtSatisTutari2.Location = new Point(107, 177);
             txtSatisTutari2.Name = "txtSatisTutari2";
             txtSatisTutari2.Size = new Size(100, 23);
             txtSatisTutari2.TabIndex = 11;
@@ -145,7 +145,7 @@
             // chkSatildimi2
             // 
             chkSatildimi2.AutoSize = true;
-            chkSatildimi2.Location = new Point(139, 295);
+            chkSatildimi2.Location = new Point(107, 210);
             chkSatildimi2.Name = "chkSatildimi2";
             chkSatildimi2.Size = new Size(15, 14);
             chkSatildimi2.TabIndex = 12;
@@ -154,7 +154,7 @@
             // 
             // btnGuncelle2
             // 
-            btnGuncelle2.Location = new Point(503, 311);
+            btnGuncelle2.Location = new Point(150, 267);
             btnGuncelle2.Name = "btnGuncelle2";
             btnGuncelle2.Size = new Size(75, 23);
             btnGuncelle2.TabIndex = 13;
@@ -164,15 +164,15 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(65, 294);
+            label1.Location = new Point(51, 209);
             label1.Name = "label1";
-            label1.Size = new Size(64, 15);
+            label1.Size = new Size(50, 15);
             label1.TabIndex = 14;
-            label1.Text = "Satıldı mı ?";
+            label1.Text = "SATILDI:";
             // 
             // btnIptal2
             // 
-            btnIptal2.Location = new Point(503, 353);
+            btnIptal2.Location = new Point(21, 267);
             btnIptal2.Name = "btnIptal2";
             btnIptal2.Size = new Size(75, 23);
             btnIptal2.TabIndex = 15;
@@ -183,7 +183,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(250, 327);
             Controls.Add(btnIptal2);
             Controls.Add(label1);
             Controls.Add(btnGuncelle2);
@@ -201,7 +201,7 @@
             Controls.Add(txtİD2);
             Controls.Add(lblAracId);
             Name = "Form2";
-            Text = "Satıldı mı ?";
+            Text = "Güncelleme Formu";
             ResumeLayout(false);
             PerformLayout();
         }
