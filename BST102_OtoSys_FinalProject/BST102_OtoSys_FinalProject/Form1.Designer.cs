@@ -157,12 +157,13 @@
             // 
             // btnForm2
             // 
-            btnForm2.Location = new Point(24, 351);
+            btnForm2.Location = new System.Drawing.Point(24, 351);
             btnForm2.Name = "btnForm2";
-            btnForm2.Size = new Size(168, 23);
+            btnForm2.Size = new System.Drawing.Size(168, 23);
             btnForm2.TabIndex = 13;
             btnForm2.Text = "Bilgileri Güncelle";
             btnForm2.UseVisualStyleBackColor = true;
+            btnForm2.Click += new System.EventHandler(this.btnForm2_Click); // Bu satırı ekleyin
             // 
             // Form1
             // 

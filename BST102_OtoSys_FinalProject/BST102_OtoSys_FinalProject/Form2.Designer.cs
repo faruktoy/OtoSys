@@ -32,7 +32,6 @@
             txtİD2 = new TextBox();
             txtMarka2 = new TextBox();
             txtModel2 = new TextBox();
-            txtUretimadedi2 = new TextBox();
             txtMarka = new Label();
             txtModel = new Label();
             numUretimAdedi = new Label();
@@ -41,9 +40,11 @@
             txtMaliyet2 = new TextBox();
             txtSatisTutari2 = new TextBox();
             chkSatildimi2 = new CheckBox();
-            btnGuncelle2 = new Button();
+            btnGuncelle = new Button();
             label1 = new Label();
             btnIptal2 = new Button();
+            numUretimAdedi2 = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)numUretimAdedi2).BeginInit();
             SuspendLayout();
             // 
             // lblAracId
@@ -51,9 +52,9 @@
             lblAracId.AutoSize = true;
             lblAracId.Location = new Point(53, 35);
             lblAracId.Name = "lblAracId";
-            lblAracId.Size = new Size(48, 15);
+            lblAracId.Size = new Size(52, 15);
             lblAracId.TabIndex = 0;
-            lblAracId.Text = "Araç ID:";
+            lblAracId.Text = "Şase No:";
             // 
             // txtİD2
             // 
@@ -75,13 +76,6 @@
             txtModel2.Name = "txtModel2";
             txtModel2.Size = new Size(100, 23);
             txtModel2.TabIndex = 3;
-            // 
-            // txtUretimadedi2
-            // 
-            txtUretimadedi2.Location = new Point(107, 119);
-            txtUretimadedi2.Name = "txtUretimadedi2";
-            txtUretimadedi2.Size = new Size(100, 23);
-            txtUretimadedi2.TabIndex = 4;
             // 
             // txtMarka
             // 
@@ -151,14 +145,15 @@
             chkSatildimi2.TabIndex = 12;
             chkSatildimi2.UseVisualStyleBackColor = true;
             // 
-            // btnGuncelle2
+            // btnGuncelle
             // 
-            btnGuncelle2.Location = new Point(150, 267);
-            btnGuncelle2.Name = "btnGuncelle2";
-            btnGuncelle2.Size = new Size(75, 23);
-            btnGuncelle2.TabIndex = 13;
-            btnGuncelle2.Text = "Güncelle";
-            btnGuncelle2.UseVisualStyleBackColor = true;
+            btnGuncelle.Location = new Point(150, 267);
+            btnGuncelle.Name = "btnGuncelle";
+            btnGuncelle.Size = new Size(75, 23);
+            btnGuncelle.TabIndex = 13;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.UseVisualStyleBackColor = true;
+            btnGuncelle.Click += btnGuncelle2_Click;
             // 
             // label1
             // 
@@ -177,15 +172,24 @@
             btnIptal2.TabIndex = 15;
             btnIptal2.Text = "İptal";
             btnIptal2.UseVisualStyleBackColor = true;
+            btnIptal2.Click += btnIptal2_Click_1;
+            // 
+            // numUretimAdedi2
+            // 
+            numUretimAdedi2.Location = new Point(107, 122);
+            numUretimAdedi2.Name = "numUretimAdedi2";
+            numUretimAdedi2.Size = new Size(81, 23);
+            numUretimAdedi2.TabIndex = 16;
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(266, 327);
+            Controls.Add(numUretimAdedi2);
             Controls.Add(btnIptal2);
             Controls.Add(label1);
-            Controls.Add(btnGuncelle2);
+            Controls.Add(btnGuncelle);
             Controls.Add(chkSatildimi2);
             Controls.Add(txtSatisTutari2);
             Controls.Add(txtMaliyet2);
@@ -194,13 +198,14 @@
             Controls.Add(numUretimAdedi);
             Controls.Add(txtModel);
             Controls.Add(txtMarka);
-            Controls.Add(txtUretimadedi2);
             Controls.Add(txtModel2);
             Controls.Add(txtMarka2);
             Controls.Add(txtİD2);
             Controls.Add(lblAracId);
             Name = "Form2";
             Text = "Güncelleme Formu";
+            Load += Form2_Load;
+            ((System.ComponentModel.ISupportInitialize)numUretimAdedi2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -211,7 +216,6 @@
         private TextBox txtİD2;
         private TextBox txtMarka2;
         private TextBox txtModel2;
-        private TextBox txtUretimadedi2;
         private Label txtMarka;
         private Label txtModel;
         private Label numUretimAdedi;
@@ -220,8 +224,9 @@
         private TextBox txtMaliyet2;
         private TextBox txtSatisTutari2;
         private CheckBox chkSatildimi2;
-        private Button btnGuncelle2;
+        private Button btnGuncelle;
         private Label label1;
         private Button btnIptal2;
+        private NumericUpDown numUretimAdedi2;
     }
 }
