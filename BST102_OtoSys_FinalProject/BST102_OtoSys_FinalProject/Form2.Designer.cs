@@ -172,7 +172,7 @@
             btnIptal2.TabIndex = 15;
             btnIptal2.Text = "İptal";
             btnIptal2.UseVisualStyleBackColor = true;
-            btnIptal2.Click += btnIptal2_Click_1;
+            btnIptal2.Click += btnIptal2_Click;
             // 
             // numUretimAdedi2
             // 

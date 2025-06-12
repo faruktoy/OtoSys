@@ -65,15 +65,5 @@ namespace BST102_OtoSys_FinalProject
                 MessageBox.Show("Lütfen güncellemek için bir araç seçin.");
             }
         }
-
-        private void lblGirisTarihi_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTur_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

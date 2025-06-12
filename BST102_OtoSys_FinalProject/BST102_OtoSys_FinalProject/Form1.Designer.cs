@@ -103,7 +103,6 @@
             lblTur.Size = new Size(25, 15);
             lblTur.TabIndex = 6;
             lblTur.Text = "Tür";
-            lblTur.Click += lblTur_Click;
             // 
             // cmbTur
             // 
@@ -121,7 +120,6 @@
             lblBaslangicTarihi.Size = new Size(87, 15);
             lblBaslangicTarihi.TabIndex = 8;
             lblBaslangicTarihi.Text = "Başlangıç tarihi";
-            lblBaslangicTarihi.Click += lblGirisTarihi_Click;
             // 
             // dtpBaslangicTarihi
             // 
