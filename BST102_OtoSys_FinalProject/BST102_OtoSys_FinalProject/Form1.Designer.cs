@@ -44,17 +44,22 @@
             btnForm2 = new Button();
             dtpBitis = new DateTimePicker();
             lblBitisTarihi = new Label();
-            txtMaliyet = new TextBox();
             lblMaliyet = new Label();
             numUretimAdedi = new NumericUpDown();
             lblUretimAdedi = new Label();
             groupBox1 = new GroupBox();
+            txtMaliyet = new NumericUpDown();
+            btnTemizle = new Button();
             chkSatildimi = new CheckBox();
             label1 = new Label();
             groupBox2 = new GroupBox();
+            lblToplamUretim = new Label();
+            lblToplamMaliyet = new Label();
+            lblSatilanMaliyet = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvAraclar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUretimAdedi).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtMaliyet).BeginInit();
             SuspendLayout();
             // 
             // lblPart
@@ -117,6 +122,7 @@
             // 
             // cmbTur
             // 
+            cmbTur.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTur.FormattingEnabled = true;
             cmbTur.Location = new Point(104, 246);
             cmbTur.Name = "cmbTur";
@@ -147,8 +153,9 @@
             dgvAraclar.Name = "dgvAraclar";
             dgvAraclar.ReadOnly = true;
             dgvAraclar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAraclar.Size = new Size(790, 515);
+            dgvAraclar.Size = new Size(1123, 547);
             dgvAraclar.TabIndex = 10;
+            dgvAraclar.CellContentClick += dgvAraclar_CellContentClick;
             // 
             // btnKaydet
             // 
@@ -162,21 +169,21 @@
             // 
             // btnSil
             // 
-            btnSil.Location = new Point(138, 445);
+            btnSil.Location = new Point(14, 498);
             btnSil.Name = "btnSil";
-            btnSil.Size = new Size(87, 29);
+            btnSil.Size = new Size(245, 29);
             btnSil.TabIndex = 12;
-            btnSil.Text = "Temizle";
+            btnSil.Text = "Aracı Sil";
             btnSil.UseVisualStyleBackColor = true;
             btnSil.Click += btnSil_Click;
             // 
             // btnForm2
             // 
-            btnForm2.Location = new Point(12, 498);
+            btnForm2.Location = new Point(12, 530);
             btnForm2.Name = "btnForm2";
             btnForm2.Size = new Size(247, 29);
             btnForm2.TabIndex = 13;
-            btnForm2.Text = "Bilgileri Güncelle";
+            btnForm2.Text = "Araç Bilgilerini Güncelle";
             btnForm2.UseVisualStyleBackColor = true;
             btnForm2.Click += btnForm2_Click;
             // 
@@ -184,6 +191,7 @@
             // 
             dtpBitis.Location = new Point(30, 398);
             dtpBitis.Name = "dtpBitis";
+            dtpBitis.ShowCheckBox = true;
             dtpBitis.Size = new Size(175, 23);
             dtpBitis.TabIndex = 15;
             // 
@@ -195,13 +203,6 @@
             lblBitisTarihi.Size = new Size(59, 15);
             lblBitisTarihi.TabIndex = 14;
             lblBitisTarihi.Text = "Bitiş tarihi";
-            // 
-            // txtMaliyet
-            // 
-            txtMaliyet.Location = new Point(104, 165);
-            txtMaliyet.Name = "txtMaliyet";
-            txtMaliyet.Size = new Size(121, 23);
-            txtMaliyet.TabIndex = 17;
             // 
             // lblMaliyet
             // 
@@ -230,14 +231,14 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtMaliyet);
+            groupBox1.Controls.Add(btnTemizle);
             groupBox1.Controls.Add(chkSatildimi);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(btnSil);
             groupBox1.Controls.Add(lblUretimAdedi);
             groupBox1.Controls.Add(lblPart);
             groupBox1.Controls.Add(numUretimAdedi);
             groupBox1.Controls.Add(txtPart);
-            groupBox1.Controls.Add(txtMaliyet);
             groupBox1.Controls.Add(lblMarka);
             groupBox1.Controls.Add(lblMaliyet);
             groupBox1.Controls.Add(lblModel);
@@ -256,6 +257,22 @@
             groupBox1.TabIndex = 20;
             groupBox1.TabStop = false;
             groupBox1.Text = "Yeni Araç Ekleme";
+            // 
+            // txtMaliyet
+            // 
+            txtMaliyet.Location = new Point(104, 166);
+            txtMaliyet.Name = "txtMaliyet";
+            txtMaliyet.Size = new Size(121, 23);
+            txtMaliyet.TabIndex = 23;
+            // 
+            // btnTemizle
+            // 
+            btnTemizle.Location = new Point(138, 445);
+            btnTemizle.Name = "btnTemizle";
+            btnTemizle.Size = new Size(87, 29);
+            btnTemizle.TabIndex = 22;
+            btnTemizle.Text = "Temizle";
+            btnTemizle.UseVisualStyleBackColor = true;
             // 
             // chkSatildimi
             // 
@@ -277,29 +294,63 @@
             // 
             // groupBox2
             // 
-            groupBox2.Location = new Point(12, 545);
+            groupBox2.Location = new Point(12, 604);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1060, 107);
+            groupBox2.Size = new Size(1307, 107);
             groupBox2.TabIndex = 21;
             groupBox2.TabStop = false;
             groupBox2.Text = "Filtreleme";
+            // 
+            // lblToplamUretim
+            // 
+            lblToplamUretim.AutoSize = true;
+            lblToplamUretim.Location = new Point(132, 574);
+            lblToplamUretim.Name = "lblToplamUretim";
+            lblToplamUretim.Size = new Size(96, 15);
+            lblToplamUretim.TabIndex = 22;
+            lblToplamUretim.Text = "lblToplamUretim";
+            // 
+            // lblToplamMaliyet
+            // 
+            lblToplamMaliyet.AutoSize = true;
+            lblToplamMaliyet.Location = new Point(550, 574);
+            lblToplamMaliyet.Name = "lblToplamMaliyet";
+            lblToplamMaliyet.Size = new Size(99, 15);
+            lblToplamMaliyet.TabIndex = 23;
+            lblToplamMaliyet.Text = "lblToplamMaliyet";
+            // 
+            // lblSatilanMaliyet
+            // 
+            lblSatilanMaliyet.AutoSize = true;
+            lblSatilanMaliyet.Location = new Point(978, 574);
+            lblSatilanMaliyet.Name = "lblSatilanMaliyet";
+            lblSatilanMaliyet.Size = new Size(94, 15);
+            lblSatilanMaliyet.TabIndex = 24;
+            lblSatilanMaliyet.Text = "lblSatilanMaliyet";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 664);
+            ClientSize = new Size(1417, 723);
+            Controls.Add(lblSatilanMaliyet);
+            Controls.Add(lblToplamMaliyet);
+            Controls.Add(btnSil);
+            Controls.Add(lblToplamUretim);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(btnForm2);
             Controls.Add(dgvAraclar);
             Name = "Form1";
             Text = "OtoSys - Araç Takip";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvAraclar).EndInit();
             ((System.ComponentModel.ISupportInitialize)numUretimAdedi).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtMaliyet).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -320,7 +371,6 @@
         private Button btnForm2;
         private DateTimePicker dtpBitis;
         private Label lblBitisTarihi;
-        private TextBox txtMaliyet;
         private Label lblMaliyet;
         private NumericUpDown numUretimAdedi;
         private Label lblUretimAdedi;
@@ -328,5 +378,10 @@
         private GroupBox groupBox2;
         private Label label1;
         private CheckBox chkSatildimi;
+        private Label lblToplamUretim;
+        private Label lblToplamMaliyet;
+        private Label lblSatilanMaliyet;
+        private Button btnTemizle;
+        private NumericUpDown txtMaliyet;
     }
 }

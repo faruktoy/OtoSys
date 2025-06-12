@@ -1,17 +1,17 @@
+using System;
+using System.Windows.Forms;
+using BST102_OtoSys_FinalProject; // Form1 bu namespace içinde tanýmlý
+
 namespace BST102_OtoSys_FinalProject
 {
-    internal static class Program
+    static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.EnableVisualStyles();                    // Görsel temayý etkinleþtirir
+            Application.SetCompatibleTextRenderingDefault(false); // Varsayýlan yazý biçimini kullanýr
+            Application.Run(new Form1());                         // Form1 arayüzü baþlatýlýr
         }
     }
 }

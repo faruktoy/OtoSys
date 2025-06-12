@@ -1,50 +1,38 @@
-// GEREKLÝ USING ALANI
-using OtoSys;
+ï»¿using BST102_OtoSys_FinalProject;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace BST102_OtoSys_FinalProject
 {
     public partial class Form1 : Form
     {
-        VeritabaniIslemleri db = new VeritabaniIslemleri(); // Veritabaný iþlemleri sýnýfý
+        private VeritabaniIslemleri db;
 
         public Form1()
         {
             InitializeComponent();
+            db = new VeritabaniIslemleri();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            cmbTur.Items.Clear();
+            cmbTur.Items.AddRange(new string[] {
+            "SUV", "Sedan", "Hatchback", "Pick-up", "Coupe",
+            "Cabrio", "Minivan", "MPV", "Station Wagon", "Panelvan", "Kamyonet"
+            });
+            cmbTur.SelectedIndex = 0;
+            txtPart.Text = db.UretimSeriNoGetir();
+            Listele();
+            HesaplaOzetBilgiler();
         }
 
-        private void btnKaydet_Click(object sender, EventArgs e)
+        private void Listele()
         {
             try
             {
-                Arac yeniArac = new Arac()
-                {
-                    Tur = cmbTur.SelectedItem?.ToString() ?? "",
-                    Marka = txtMarka.Text,
-                    Model = txtModel.Text,
-                    UretimBaslangicTarihi = dtpBaslangic.Value,
-                    UretimBitisTarihi = dtpBitis.Checked ? dtpBitis.Value : null,
-                    MaliyetTutari = Convert.ToDecimal(txtMaliyet.Text),
-                    SatisDurumu = chkSatildimi.Checked ? 0 : 1, // 0 = Satýldý, 1 = Satýlacak
-                    UretimAdedi = (int)numUretimAdedi.Value
-                };
-
-                if (db.AracEkle(yeniArac))
-                {
-                    MessageBox.Show("Araç baþarýyla eklendi.");
-                    Temizle();
-                }
-                else
-                {
-                    MessageBox.Show("Araç eklenemedi.");
-                }
+                dgvAraclar.DataSource = db.AraclariGetir().Tables["Arac"];
             }
             catch (Exception ex)
             {
@@ -52,27 +40,32 @@ namespace BST102_OtoSys_FinalProject
             }
         }
 
-        private void btnSil_Click(object sender, EventArgs e)
+        private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if (dgvAraclar.SelectedRows.Count > 0)
+            Arac yeniArac = new Arac()
             {
-                int secilenId = Convert.ToInt32(dgvAraclar.SelectedRows[0].Cells["AracId"].Value);
-                DialogResult sonuc = MessageBox.Show("Bu aracý silmek istediðinize emin misiniz?", "Silme Onayý", MessageBoxButtons.YesNo);
-                if (sonuc == DialogResult.Yes)
-                {
-                    if (db.AracSil(secilenId))
-                    {
-                        MessageBox.Show("Araç baþarýyla silindi.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Silme iþlemi baþarýsýz.");
-                    }
-                }
+                Tur = cmbTur.Text,
+                Marka = txtMarka.Text,
+                Model = txtModel.Text,
+                UretimBaslangicTarihi = dtpBaslangic.Value,
+                UretimBitisTarihi = dtpBitis.Checked ? dtpBitis.Value : (DateTime?)null,
+                MaliyetTutari = Convert.ToDecimal(txtMaliyet.Text),
+                SatisDurumu = chkSatildimi.Checked ? 0 : 1,
+                UretimAdedi = (int)numUretimAdedi.Value,
+
+            };
+
+            bool sonuc = db.AracEkle(yeniArac);
+            if (sonuc)
+            {
+                MessageBox.Show("AraÃ§ baÅŸarÄ±yla eklendi.");
+                Temizle();
+                Listele();
+                HesaplaOzetBilgiler();
             }
             else
             {
-                MessageBox.Show("Lütfen silinecek aracý seçiniz.");
+                MessageBox.Show("Ekleme sÄ±rasÄ±nda hata oluÅŸtu.");
             }
         }
 
@@ -80,28 +73,116 @@ namespace BST102_OtoSys_FinalProject
         {
             txtMarka.Clear();
             txtModel.Clear();
-            txtMaliyet.Clear();
-            cmbTur.SelectedIndex = -1;
-            numUretimAdedi.Value = 0;
-            chkSatildimi.Checked = false;
+            txtMaliyet.Value = 0;
             dtpBaslangic.Value = DateTime.Now;
             dtpBitis.Value = DateTime.Now;
-            dtpBitis.Checked = false;
+            chkSatildimi.Checked = false;
+            numUretimAdedi.Value = 0;
+            txtPart.Text = db.UretimSeriNoGetir();
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            if (dgvAraclar.SelectedRows.Count > 0)
+            {
+                int secilenId = Convert.ToInt32(dgvAraclar.SelectedRows[0].Cells["AracId"].Value);
+                DialogResult result = MessageBox.Show("Bu aracÄ± silmek istediÄŸinize emin misiniz?", "Silme OnayÄ±", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    db.AracSil(secilenId);
+                    Listele();
+                    HesaplaOzetBilgiler();
+                }
+            }
+            else
+            {
+                MessageBox.Show("LÃ¼tfen silinecek bir araÃ§ seÃ§in.");
+            }
         }
 
         private void btnForm2_Click(object sender, EventArgs e)
         {
             if (dgvAraclar.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(dgvAraclar.SelectedRows[0].Cells["AracId"].Value);
-                Form2 guncelleForm = new Form2(id);
-                guncelleForm.Owner = this;
-                guncelleForm.ShowDialog();
+                DataRowView rowView = dgvAraclar.SelectedRows[0].DataBoundItem as DataRowView;
+                if (rowView != null)
+                {
+                    Arac secilen = new Arac
+                    {
+                        UretimSeriNo = rowView["UretimSeriNo"].ToString(),
+                        Tur = rowView["Tur"].ToString(),
+                        Marka = rowView["Marka"].ToString(),
+                        Model = rowView["Model"].ToString(),
+                        UretimAdedi = Convert.ToInt32(rowView["UretimAdedi"]),
+                        MaliyetTutari = Convert.ToDecimal(rowView["MaliyetTutari"]),
+                        SatisDurumu = Convert.ToInt32(rowView["SatisDurumu"])
+                    };
+
+                    Form2 frm = new Form2(secilen);
+                    frm.Owner = this;
+                    frm.ShowDialog();
+                    Listele();
+                    HesaplaOzetBilgiler();
+                }
             }
             else
             {
-                MessageBox.Show("Lütfen güncellenecek bir araç seçiniz.");
+                MessageBox.Show("LÃ¼tfen gÃ¼ncellenecek bir araÃ§ seÃ§in.");
             }
         }
+
+        public void UpdateArac(string id, string yeniTur, string yeniMarka, string yeniModel, int yeniAdet, decimal yeniMaliyet, bool satildiMi)
+        {
+            Arac guncellenen = new Arac
+            {
+                UretimSeriNo = id,
+                Tur = yeniTur,
+                Marka = yeniMarka,
+                Model = yeniModel,
+                UretimAdedi = yeniAdet,
+                MaliyetTutari = yeniMaliyet,
+                SatisDurumu = satildiMi ? 0 : 1
+            };
+
+            db.AracGuncelle(guncellenen);
+        }
+
+        private void HesaplaOzetBilgiler()
+        {
+            DataTable araclar = db.AraclariGetir().Tables["Arac"];
+            int toplamAdet = 0;
+            decimal toplamMaliyet = 0;
+            decimal toplamSatilanMaliyet = 0;
+
+            foreach (DataRow row in araclar.Rows)
+            {
+                int adet = Convert.ToInt32(row["UretimAdedi"]);
+                decimal maliyet = Convert.ToDecimal(row["MaliyetTutari"]);
+                int satisDurumu = Convert.ToInt32(row["SatisDurumu"]);
+
+                toplamAdet += adet;
+                toplamMaliyet += maliyet * adet;
+
+                if (satisDurumu == 0)
+                {
+                    toplamSatilanMaliyet += maliyet * adet;
+                }
+            }
+
+            lblToplamUretim.Text = toplamAdet.ToString();
+            lblToplamMaliyet.Text = toplamMaliyet.ToString("C2");
+            lblSatilanMaliyet.Text = toplamSatilanMaliyet.ToString("C2");
+        }
+
+        private void lblToplamAdet_Click(object sender, EventArgs e)
+        {
+            // BoÅŸ bÄ±rakÄ±ldÄ±
+        }
+
+        private void dgvAraclar_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
     }
 }

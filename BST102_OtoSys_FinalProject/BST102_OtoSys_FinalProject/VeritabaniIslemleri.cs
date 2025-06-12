@@ -1,144 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Data;
-using Microsoft.Data.SqlClient;
 
-namespace OtoSys
+namespace BST102_OtoSys_FinalProject
 {
-    // Araç bilgilerini taşıyan temel sınıf /
-    public class Arac
-    {
-        public int AracId { get; set; }
-        public string Tur { get; set; } = string.Empty;
-        public string Marka { get; set; } = string.Empty;
-        public string Model { get; set; } = string.Empty;
-        public DateTime UretimBaslangicTarihi { get; set; }
-        public DateTime? UretimBitisTarihi { get; set; }
-        public decimal MaliyetTutari { get; set; }
-        public int SatisDurumu { get; set; }
-        public int UretimAdedi { get; set; }
-        public string UretimSeriNo { get; set; } = string.Empty;
-    }
-
-    // Veritabanı işlemlerini yöneten sınıf
     public class VeritabaniIslemleri
     {
-        // Bağlantı bilgisi App.config dosyasından alınır
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["OtoSysConn"].ConnectionString;
+        private SqlConnection baglanti = new SqlConnection("Server=.\\SQLEXPRESS;Database=OtoSysDB;Trusted_Connection=True;TrustServerCertificate=True");
+        private SqlDataAdapter da;
+        private DataSet ds;
 
-        // Yeni araç ekleme metodu
+        public DataSet AraclariGetir()
+        {
+            da = new SqlDataAdapter("SELECT * FROM Arac", baglanti);
+            ds = new DataSet();
+            baglanti.Open();
+            da.Fill(ds, "Arac");
+            baglanti.Close();
+            return ds;
+        }
+    
+
         public bool AracEkle(Arac yeniArac)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string query = @"INSERT INTO Arac (Tur, Marka, Model, UretimBaslangicTarihi, UretimBitisTarihi, MaliyetTutari, SatisDurumu, UretimAdedi)
+                             VALUES (@Tur, @Marka, @Model, @UBT, @UBiT, @Maliyet, @Satis, @Adet)";
+
+            using (SqlCommand komut = new SqlCommand(query, baglanti))
             {
-                string query = @"INSERT INTO Arac 
-                                 (Tur, Marka, Model, UretimBaslangicTarihi, UretimBitisTarihi, MaliyetTutari, SatisDurumu, UretimAdedi)
-                                 VALUES (@Tur, @Marka, @Model, @UBT, @UBiT, @Maliyet, @Satis, @Adet)";
+                komut.Parameters.AddWithValue("@Tur", yeniArac.Tur);
+                komut.Parameters.AddWithValue("@Marka", yeniArac.Marka);
+                komut.Parameters.AddWithValue("@Model", yeniArac.Model);
+                komut.Parameters.AddWithValue("@UBT", yeniArac.UretimBaslangicTarihi);
+                komut.Parameters.AddWithValue("@UBiT", (object?)yeniArac.UretimBitisTarihi ?? DBNull.Value);
+                komut.Parameters.AddWithValue("@Maliyet", yeniArac.MaliyetTutari);
+                komut.Parameters.AddWithValue("@Satis", yeniArac.SatisDurumu);
+                komut.Parameters.AddWithValue("@Adet", yeniArac.UretimAdedi);
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Tur", yeniArac.Tur);
-                    command.Parameters.AddWithValue("@Marka", yeniArac.Marka);
-                    command.Parameters.AddWithValue("@Model", yeniArac.Model);
-                    command.Parameters.AddWithValue("@UBT", yeniArac.UretimBaslangicTarihi);
-                    command.Parameters.AddWithValue("@UBiT", (object?)yeniArac.UretimBitisTarihi ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@Maliyet", yeniArac.MaliyetTutari);
-                    command.Parameters.AddWithValue("@Satis", yeniArac.SatisDurumu);
-                    command.Parameters.AddWithValue("@Adet", yeniArac.UretimAdedi);
+                baglanti.Open();
+                int sonuc = komut.ExecuteNonQuery();
+                baglanti.Close();
 
-                    connection.Open();
-                    return command.ExecuteNonQuery() > 0;
-                }
+                return sonuc > 0;
             }
         }
 
-        // Mevcut bir aracı güncelleme metodu
         public bool AracGuncelle(Arac arac)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string query = @"UPDATE Arac SET Tur = @Tur, Marka = @Marka, Model = @Model, UretimBaslangicTarihi = @UBT, UretimBitisTarihi = @UBiT, MaliyetTutari = @Maliyet, SatisDurumu = @Satis, UretimAdedi = @Adet WHERE AracId = @Id";
+
+            using (SqlCommand komut = new SqlCommand(query, baglanti))
             {
-                string query = @"UPDATE Arac SET 
-                                    Tur = @Tur,
-                                    Marka = @Marka,
-                                    Model = @Model,
-                                    UretimBaslangicTarihi = @UBT,
-                                    UretimBitisTarihi = @UBiT,
-                                    MaliyetTutari = @Maliyet,
-                                    SatisDurumu = @Satis,
-                                    UretimAdedi = @Adet
-                                 WHERE AracId = @Id";
+                komut.Parameters.AddWithValue("@Tur", arac.Tur);
+                komut.Parameters.AddWithValue("@Marka", arac.Marka);
+                komut.Parameters.AddWithValue("@Model", arac.Model);
+                komut.Parameters.AddWithValue("@UBT", arac.UretimBaslangicTarihi);
+                komut.Parameters.AddWithValue("@UBiT", (object?)arac.UretimBitisTarihi ?? DBNull.Value);
+                komut.Parameters.AddWithValue("@Maliyet", arac.MaliyetTutari);
+                komut.Parameters.AddWithValue("@Satis", arac.SatisDurumu);
+                komut.Parameters.AddWithValue("@Adet", arac.UretimAdedi);
+                komut.Parameters.AddWithValue("@Id", arac.AracId);
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Tur", arac.Tur);
-                    command.Parameters.AddWithValue("@Marka", arac.Marka);
-                    command.Parameters.AddWithValue("@Model", arac.Model);
-                    command.Parameters.AddWithValue("@UBT", arac.UretimBaslangicTarihi);
-                    command.Parameters.AddWithValue("@UBiT", (object?)arac.UretimBitisTarihi ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@Maliyet", arac.MaliyetTutari);
-                    command.Parameters.AddWithValue("@Satis", arac.SatisDurumu);
-                    command.Parameters.AddWithValue("@Adet", arac.UretimAdedi);
-                    command.Parameters.AddWithValue("@Id", arac.AracId);
+                baglanti.Open();
+                int sonuc = komut.ExecuteNonQuery();
+                baglanti.Close();
 
-                    connection.Open();
-                    return command.ExecuteNonQuery() > 0;
-                }
+                return sonuc > 0;
             }
         }
 
-        // Araç silme işlemi
         public bool AracSil(int aracId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                string query = "DELETE FROM Arac WHERE AracId = @Id";
+            string query = "DELETE FROM Arac WHERE AracId = @Id";
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", aracId);
-                    connection.Open();
-                    return command.ExecuteNonQuery() > 0;
-                }
+            using (SqlCommand komut = new SqlCommand(query, baglanti))
+            {
+                komut.Parameters.AddWithValue("@Id", aracId);
+                baglanti.Open();
+                int sonuc = komut.ExecuteNonQuery();
+                baglanti.Close();
+                return sonuc > 0;
             }
         }
 
-        // Tüm araçları listeleme işlemi
-        public List<Arac> AraclariGetir()
+        public string UretimSeriNoGetir()
         {
-            List<Arac> liste = new List<Arac>();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string query = "SELECT ISNULL(MAX(AracId), 998) + 2 FROM Arac";
+            using (SqlCommand cmd = new SqlCommand(query, baglanti))
             {
-                string query = "SELECT * FROM Arac";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var arac = new Arac
-                            {
-                                AracId = Convert.ToInt32(reader["AracId"]),
-                                Tur = reader["Tur"].ToString(),
-                                Marka = reader["Marka"].ToString(),
-                                Model = reader["Model"].ToString(),
-                                UretimBaslangicTarihi = Convert.ToDateTime(reader["UretimBaslangicTarihi"]),
-                                UretimBitisTarihi = reader["UretimBitisTarihi"] == DBNull.Value ? null : Convert.ToDateTime(reader["UretimBitisTarihi"]),
-                                MaliyetTutari = Convert.ToDecimal(reader["MaliyetTutari"]),
-                                SatisDurumu = Convert.ToInt32(reader["SatisDurumu"]),
-                                UretimAdedi = Convert.ToInt32(reader["UretimAdedi"]),
-                                UretimSeriNo = reader["UretimSeriNo"].ToString()
-                            };
-                            liste.Add(arac);
-                        }
-                    }
+                    baglanti.Open();
+                    int id = Convert.ToInt32(cmd.ExecuteScalar());
+                    return "TGTRM2PRT" + id.ToString("D5");
+                }
+                catch
+                {
+                    return "TGTRM2PRT00000";
+                }
+                finally
+                {
+                    baglanti.Close();
                 }
             }
-
-            return liste;
         }
     }
 }

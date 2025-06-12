@@ -17,6 +17,7 @@ namespace BST102_OtoSys_FinalProject
         public int UretimAdedi { get; set; }
         public string UretimSeriNo { get; set; } = string.Empty; // Veritabanında computed, boş bırakılmamalı
     }
+
     public enum SatisDurumu
     {
         Satildi = 0,
