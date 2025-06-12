@@ -28,12 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "LoginForm";
+            txtKullaniciAdi = new TextBox();
+            txtSifre = new TextBox();
+            btnGiris = new Button();
+            lblKullaniciAdi = new Label();
+            lblSifre = new Label();
+            SuspendLayout();
+            // 
+            // txtKullaniciAdi
+            // 
+            txtKullaniciAdi.Location = new Point(106, 94);
+            txtKullaniciAdi.Name = "txtKullaniciAdi";
+            txtKullaniciAdi.Size = new Size(100, 23);
+            txtKullaniciAdi.TabIndex = 0;
+            // 
+            // txtSifre
+            // 
+            txtSifre.Cursor = Cursors.IBeam;
+            txtSifre.Location = new Point(106, 141);
+            txtSifre.Name = "txtSifre";
+            txtSifre.Size = new Size(100, 23);
+            txtSifre.TabIndex = 1;
+            txtSifre.UseSystemPasswordChar = true;
+            // 
+            // btnGiris
+            // 
+            btnGiris.Location = new Point(116, 189);
+            btnGiris.Name = "btnGiris";
+            btnGiris.Size = new Size(75, 23);
+            btnGiris.TabIndex = 2;
+            btnGiris.Text = "Giriş yap";
+            btnGiris.UseVisualStyleBackColor = true;
+            // 
+            // lblKullaniciAdi
+            // 
+            lblKullaniciAdi.AutoSize = true;
+            lblKullaniciAdi.Location = new Point(27, 97);
+            lblKullaniciAdi.Name = "lblKullaniciAdi";
+            lblKullaniciAdi.Size = new Size(73, 15);
+            lblKullaniciAdi.TabIndex = 3;
+            lblKullaniciAdi.Text = "Kullanıcı Adı";
+            // 
+            // lblSifre
+            // 
+            lblSifre.AutoSize = true;
+            lblSifre.Location = new Point(43, 144);
+            lblSifre.Name = "lblSifre";
+            lblSifre.Size = new Size(30, 15);
+            lblSifre.TabIndex = 4;
+            lblSifre.Text = "Şifre";
+            // 
+            // LoginForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(304, 284);
+            Controls.Add(lblSifre);
+            Controls.Add(lblKullaniciAdi);
+            Controls.Add(btnGiris);
+            Controls.Add(txtSifre);
+            Controls.Add(txtKullaniciAdi);
+            Name = "LoginForm";
+            Text = "Kullanıcı Girişi";
+            Load += LoginForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private Button btnGiris;
+        private TextBox txtKullaniciAdi;
+        private TextBox txtSifre;
+        private Label lblKullaniciAdi;
+        private Label lblSifre;
     }
 }

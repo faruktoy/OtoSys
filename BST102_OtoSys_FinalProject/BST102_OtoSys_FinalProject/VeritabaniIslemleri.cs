@@ -6,7 +6,7 @@ namespace BST102_OtoSys_FinalProject
 {
     public class VeritabaniIslemleri
     {
-        private SqlConnection baglanti = new SqlConnection("Server=.\\SQLEXPRESS;Database=OtoSysDB;Trusted_Connection=True;TrustServerCertificate=True");
+        private SqlConnection baglanti = new SqlConnection("Server=(local);Database=OtoSysDB;Trusted_Connection=True;TrustServerCertificate=True");
         private SqlDataAdapter da;
         private DataSet ds;
 

@@ -16,5 +16,10 @@ namespace BST102_OtoSys_FinalProject
         {
             InitializeComponent();
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
