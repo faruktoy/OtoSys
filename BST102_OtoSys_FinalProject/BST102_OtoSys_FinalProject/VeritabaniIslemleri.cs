@@ -2,10 +2,33 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using Microsoft.Data.SqlClient; 
+using Microsoft.Data.SqlClient; // DEĞİŞİKLİK: Modern kütüphane kullanıldı.
 
-namespace BST102_OtoSys_FinalProject
+// Projenizin ismine göre namespace'i düzenleyebilirsiniz.
+namespace OtoSys
 {
+    /// <summary>
+    /// Veritabanındaki 'Arac' tablosundaki bir satırı temsil eden sınıf.
+    /// Bu sınıfı kullanmak, kod içerisinde veri taşımayı kolaylaştırır.
+    /// </summary>
+    public class Arac
+    {
+        public int AracId { get; set; }
+        public string SaseNo { get; set; }
+        public string Tur { get; set; }
+        public string Marka { get; set; }
+        public string Model { get; set; }
+        public DateTime UretimBaslangicTarihi { get; set; }
+        public DateTime? UretimBitisTarihi { get; set; } // Null olabilir, bu yüzden '?' ekledik.
+        public decimal MaliyetTutari { get; set; }
+        public string SatisDurumu { get; set; } // "Satıldı" veya "Satılacak"
+        public int UretimAdedi { get; set; }
+    }
+
+    /// <summary>
+    /// Veritabanı ile ilgili tüm CRUD (Create, Read, Update, Delete)
+    /// işlemlerini yöneten sınıf.
+    /// </summary>
     public class VeritabaniIslemleri
     {
         // DEĞİŞİKLİK: Bağlantı bilgisi artık doğrudan App.config dosyasından okunuyor.
@@ -63,38 +86,76 @@ namespace BST102_OtoSys_FinalProject
                 }
             }
         }
-
-        /// <summary>
-        /// Veritabanındaki tüm araç kayıtlarını bir DataTable olarak getirir.
-        /// Bu metot, DataGridView'i doldurmak için idealdir.
-        /// </summary>
-        /// <returns>Araçları içeren bir DataTable.</returns>
-        public DataTable AraclariGetir()
+        public bool AracGuncelle(Arac arac)
         {
-            DataTable dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // SELECT * sorgusu yeni eklenen UretimAdedi kolonunu otomatik olarak alacaktır.
-                string query = "SELECT * FROM Arac ORDER BY AracId DESC"; // Son eklenenler üstte görünsün diye sıralama eklendi.
+                string query = "UPDATE Arac SET Tur = @Tur, Marka = @Marka, Model = @Model, UretimBaslangicTarihi = @UBT, UretimBitisTarihi = @UBiT, MaliyetTutari = @Maliyet, SatisDurumu = @Satis WHERE Id = @Id";
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    try
+                    command.Parameters.AddWithValue("@Tur", arac.Tur);
+                    command.Parameters.AddWithValue("@Marka", arac.Marka);
+                    command.Parameters.AddWithValue("@Model", arac.Model);
+                    command.Parameters.AddWithValue("@UBT", arac.UretimBaslangicTarihi);
+                    command.Parameters.AddWithValue("@UBiT", arac.UretimBitisTarihi);
+                    command.Parameters.AddWithValue("@Maliyet", arac.MaliyetTutari);
+                    command.Parameters.AddWithValue("@Satis", arac.SatisDurumu);
+                    command.Parameters.AddWithValue("@Id", arac.AracId);
+
+                    connection.Open();
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool AracSil(int AracId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Arac WHERE Id = @Id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", AracId);
+                    connection.Open();
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public List<Arac> AraclariGetir()
+        {
+            List<Arac> araclar = new List<Arac>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Arac";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        connection.Open();
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        adapter.Fill(dataTable); // Gelen verileri DataTable'a doldur.
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Hata: " + ex.Message);
+                        while (reader.Read())
+                        {
+                            Arac a = new Arac
+                            {
+                                AracId = (int)reader["Id"],
+                                Tur = reader["Tur"].ToString(),
+                                Marka = reader["Marka"].ToString(),
+                                Model = reader["Model"].ToString(),
+                                UretimBaslangicTarihi = (DateTime)reader["UretimBaslangicTarihi"],
+                                UretimBitisTarihi = (DateTime)reader["UretimBitisTarihi"],
+                                MaliyetTutari = Convert.ToDecimal(reader["MaliyetTutari"]),
+                                SatisDurumu = Convert.ToInt32(reader["SatisDurumu"])
+                            };
+                            araclar.Add(a);
+                        }
                     }
                 }
             }
-            return dataTable;
+            return araclar;
         }
 
-        // TODO - 3. KİŞİNİN SORUMLULUĞU: Proje ilerledikçe buraya 'AracGuncelle' ve 'AracSil' metotları eklenecek.
-        // public bool AracGuncelle(Arac guncellenecekArac) { ... }
-        // public bool AracSil(int aracId) { ... }
+
+
     }
 }
