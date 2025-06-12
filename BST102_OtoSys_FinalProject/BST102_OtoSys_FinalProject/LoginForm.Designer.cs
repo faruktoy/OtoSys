@@ -33,6 +33,7 @@
             btnGiris = new Button();
             lblKullaniciAdi = new Label();
             lblSifre = new Label();
+            lblUyari = new Label();
             SuspendLayout();
             // 
             // txtKullaniciAdi
@@ -53,7 +54,7 @@
             // 
             // btnGiris
             // 
-            btnGiris.Location = new Point(116, 189);
+            btnGiris.Location = new Point(109, 180);
             btnGiris.Name = "btnGiris";
             btnGiris.Size = new Size(75, 23);
             btnGiris.TabIndex = 2;
@@ -78,16 +79,29 @@
             lblSifre.TabIndex = 4;
             lblSifre.Text = "Şifre";
             // 
+            // lblUyari
+            // 
+            lblUyari.AutoSize = true;
+            lblUyari.ForeColor = Color.Red;
+            lblUyari.Location = new Point(109, 238);
+            lblUyari.Name = "lblUyari";
+            lblUyari.Size = new Size(70, 15);
+            lblUyari.TabIndex = 5;
+            lblUyari.Text = "Hatalı Giriş !";
+            lblUyari.Visible = false;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(304, 284);
+            Controls.Add(lblUyari);
             Controls.Add(lblSifre);
             Controls.Add(lblKullaniciAdi);
             Controls.Add(btnGiris);
             Controls.Add(txtSifre);
             Controls.Add(txtKullaniciAdi);
+            ForeColor = Color.Black;
             Name = "LoginForm";
             Text = "Kullanıcı Girişi";
             Load += LoginForm_Load;
@@ -104,5 +118,6 @@
         private TextBox txtSifre;
         private Label lblKullaniciAdi;
         private Label lblSifre;
+        private Label lblUyari;
     }
 }
