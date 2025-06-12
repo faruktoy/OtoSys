@@ -59,7 +59,7 @@ namespace BST102_OtoSys_FinalProject
             Form1 mainForm = this.Owner as Form1;
             if (mainForm != null)
             {
-                mainForm.UpdateArac(this.AracId, yeniMarka, yeniModel, yeniUretimAdedi, yeniMaliyet, yeniSatisTutari, yeniSatildiMi);
+                mainForm.(this.AracId, yeniMarka, yeniModel, yeniUretimAdedi, yeniMaliyet, yeniSatisTutari, yeniSatildiMi);
                 MessageBox.Show("Araç bilgileri başarıyla güncellendi.");
                 this.Close(); // Güncelleme işlemi bitince Form2'yi kapat
             }
@@ -71,9 +71,30 @@ namespace BST102_OtoSys_FinalProject
 
         private void btnIptal2_Click(object sender, EventArgs e)
         {
+        
             this.Close(); // İptal butonuna basıldığında Form2'yi kapat
         }
+        
+       
+    // ... (Diğer property'leriniz ve Form2_Load metodunuz) ...
 
+    private void btnIptal_Click(object sender, EventArgs e)
+        {
+            // 1. DialogResult'ı İptal olarak ayarlayın.
+            this.DialogResult = DialogResult.Cancel;
 
+            // 2. Formu kapatın.
+            this.Close();
+        }
+
+        // ... (btnGuncelle_Click metodunuz) ...
     }
+
+
+
+
+
+
+
 }
+
