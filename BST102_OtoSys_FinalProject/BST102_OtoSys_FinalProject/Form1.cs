@@ -1,68 +1,106 @@
-// Form1.cs
+// GEREKLÝ USING ALANI
+using OtoSys;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BST102_OtoSys_FinalProject
 {
     public partial class Form1 : Form
     {
+        VeritabaniIslemleri db = new VeritabaniIslemleri(); // Veritabaný iþlemleri sýnýfý
+
         public Form1()
         {
             InitializeComponent();
-            // DataGridView'i örnek verilerle doldur (test amaçlý)
-            InitializeDataGridView();
         }
 
-        private void InitializeDataGridView()
+        private void Form1_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("AracId", typeof(int));
-            dt.Columns.Add("Marka", typeof(string));
-            dt.Columns.Add("Model", typeof(string));
-            dt.Columns.Add("UretimAdedi", typeof(int));
-            dt.Columns.Add("Maliyet", typeof(decimal));
-            dt.Columns.Add("SatisTutari", typeof(decimal));
-            dt.Columns.Add("SatildiMi", typeof(bool));
 
-            dt.Rows.Add(1, "Toyota", "Corolla", 100, 150000.00m, 180000.00m, false);
-            dt.Rows.Add(2, "Honda", "Civic", 80, 160000.00m, 190000.00m, true);
-            dt.Rows.Add(3, "Ford", "Focus", 120, 140000.00m, 170000.00m, false);
+        }
 
-            dgvAraclar.DataSource = dt;
+        private void btnKaydet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Arac yeniArac = new Arac()
+                {
+                    Tur = cmbTur.SelectedItem?.ToString() ?? "",
+                    Marka = txtMarka.Text,
+                    Model = txtModel.Text,
+                    UretimBaslangicTarihi = dtpBaslangic.Value,
+                    UretimBitisTarihi = dtpBitis.Checked ? dtpBitis.Value : null,
+                    MaliyetTutari = Convert.ToDecimal(txtMaliyet.Text),
+                    SatisDurumu = chkSatildimi.Checked ? 0 : 1, // 0 = Satýldý, 1 = Satýlacak
+                    UretimAdedi = (int)numUretimAdedi.Value
+                };
+
+                if (db.AracEkle(yeniArac))
+                {
+                    MessageBox.Show("Araç baþarýyla eklendi.");
+                    Temizle();
+                }
+                else
+                {
+                    MessageBox.Show("Araç eklenemedi.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message);
+            }
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            if (dgvAraclar.SelectedRows.Count > 0)
+            {
+                int secilenId = Convert.ToInt32(dgvAraclar.SelectedRows[0].Cells["AracId"].Value);
+                DialogResult sonuc = MessageBox.Show("Bu aracý silmek istediðinize emin misiniz?", "Silme Onayý", MessageBoxButtons.YesNo);
+                if (sonuc == DialogResult.Yes)
+                {
+                    if (db.AracSil(secilenId))
+                    {
+                        MessageBox.Show("Araç baþarýyla silindi.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Silme iþlemi baþarýsýz.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen silinecek aracý seçiniz.");
+            }
+        }
+
+        private void Temizle()
+        {
+            txtMarka.Clear();
+            txtModel.Clear();
+            txtMaliyet.Clear();
+            cmbTur.SelectedIndex = -1;
+            numUretimAdedi.Value = 0;
+            chkSatildimi.Checked = false;
+            dtpBaslangic.Value = DateTime.Now;
+            dtpBitis.Value = DateTime.Now;
+            dtpBitis.Checked = false;
         }
 
         private void btnForm2_Click(object sender, EventArgs e)
         {
             if (dgvAraclar.SelectedRows.Count > 0)
             {
-                // Seçilen ilk satýrý al
-                DataGridViewRow selectedRow = dgvAraclar.SelectedRows[0];
-
-                // Form2'nin bir örneðini oluþtur
-                Form2 form2 = new Form2();
-
-                // Verileri Form2'deki public property'lere aktar
-                form2.AracId = Convert.ToInt32(selectedRow.Cells["AracId"].Value);
-                form2.Marka = selectedRow.Cells["Marka"].Value.ToString();
-                form2.Model = selectedRow.Cells["Model"].Value.ToString();
-                form2.UretimAdedi = Convert.ToInt32(selectedRow.Cells["UretimAdedi"].Value);
-                form2.Maliyet = Convert.ToDecimal(selectedRow.Cells["Maliyet"].Value);
-                form2.SatisTutari = Convert.ToDecimal(selectedRow.Cells["SatisTutari"].Value);
-                form2.SatildiMi = Convert.ToBoolean(selectedRow.Cells["SatildiMi"].Value);
-
-                // Form2'yi göster
-                form2.ShowDialog();
+                int id = Convert.ToInt32(dgvAraclar.SelectedRows[0].Cells["AracId"].Value);
+                Form2 guncelleForm = new Form2(id);
+                guncelleForm.Owner = this;
+                guncelleForm.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Lütfen güncellemek için bir araç seçin.");
+                MessageBox.Show("Lütfen güncellenecek bir araç seçiniz.");
             }
         }
     }

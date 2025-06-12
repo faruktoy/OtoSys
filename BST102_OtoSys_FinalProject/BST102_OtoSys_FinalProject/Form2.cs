@@ -59,7 +59,7 @@ namespace BST102_OtoSys_FinalProject
             Form1 mainForm = this.Owner as Form1;
             if (mainForm != null)
             {
-                mainForm.UpdateArac(this.AracId, yeniMarka, yeniModel, yeniUretimAdedi, yeniMaliyet, yeniSatisTutari, yeniSatildiMi);
+                mainForm.AracGuncelle(this.AracId, yeniMarka, yeniModel, yeniUretimAdedi, yeniMaliyet, yeniSatisTutari, yeniSatildiMi);
                 MessageBox.Show("Araç bilgileri başarıyla güncellendi.");
                 this.Close(); // Güncelleme işlemi bitince Form2'yi kapat
             }
