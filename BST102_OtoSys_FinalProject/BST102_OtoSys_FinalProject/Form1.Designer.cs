@@ -157,7 +157,6 @@
             dgvAraclar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAraclar.Size = new Size(1123, 547);
             dgvAraclar.TabIndex = 10;
-            dgvAraclar.CellContentClick += dgvAraclar_CellContentClick;
             // 
             // btnKaydet
             // 

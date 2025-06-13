@@ -180,10 +180,6 @@ namespace BST102_OtoSys_FinalProject
             lblToplamMaliyet.Text = toplamMaliyet.ToString("C2");
             lblSatilanMaliyet.Text = toplamSatilanMaliyet.ToString("C2");
         }
-
-        private void lblToplamAdet_Click(object sender, EventArgs e) { }
-        private void dgvAraclar_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-
         private void btnTemizle_Click(object sender, EventArgs e)
         {
             Temizle();

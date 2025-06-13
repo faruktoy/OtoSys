@@ -6,7 +6,8 @@ namespace BST102_OtoSys_FinalProject
 {
     public class VeritabaniIslemleri
     {
-        private SqlConnection baglanti = new SqlConnection("Server=(local);Database=OtoSysDB;Trusted_Connection=True;TrustServerCertificate=True");
+        //Server kısmını, kendi sql 'server name' değerinizle değiştirin. (Server=**;)
+        private SqlConnection baglanti = new SqlConnection("Server=.\\SQLEXPRESS;Database=OtoSysDB;Trusted_Connection=True;TrustServerCertificate=True");
         private SqlDataAdapter da;
         private DataSet ds;
 
@@ -85,24 +86,28 @@ namespace BST102_OtoSys_FinalProject
 
         public string UretimSeriNoGetir()
         {
+            const string prefix = "TGTRM2PRT";
             string query = "SELECT ISNULL(MAX(AracId), 998) + 2 FROM Arac";
-            using (SqlCommand cmd = new SqlCommand(query, baglanti))
+            string seriNo = $"{prefix}00000";
+
+            if (baglanti.State != ConnectionState.Open)
+                baglanti.Open();
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter(query, baglanti))
             {
-                try
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
                 {
-                    baglanti.Open();
-                    int id = Convert.ToInt32(cmd.ExecuteScalar());
-                    return "TGTRM2PRT" + id.ToString("D5");
-                }
-                catch
-                {
-                    return "TGTRM2PRT00000";
-                }
-                finally
-                {
-                    baglanti.Close();
+                    int id = Convert.ToInt32(dt.Rows[0][0]);
+                    seriNo = $"{prefix}{id:D5}";
                 }
             }
+
+            if (baglanti.State == ConnectionState.Open)
+                baglanti.Close();
+
+            return seriNo;
         }
     }
 }
