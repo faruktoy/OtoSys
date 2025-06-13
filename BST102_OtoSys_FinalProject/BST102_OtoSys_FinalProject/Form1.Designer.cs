@@ -218,6 +218,7 @@
             // numUretimAdedi
             // 
             numUretimAdedi.Location = new Point(104, 207);
+            numUretimAdedi.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numUretimAdedi.Name = "numUretimAdedi";
             numUretimAdedi.Size = new Size(121, 23);
             numUretimAdedi.TabIndex = 18;
@@ -263,6 +264,7 @@
             // txtMaliyet
             // 
             txtMaliyet.Location = new Point(104, 166);
+            txtMaliyet.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             txtMaliyet.Name = "txtMaliyet";
             txtMaliyet.Size = new Size(121, 23);
             txtMaliyet.TabIndex = 23;
