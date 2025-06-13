@@ -34,29 +34,28 @@
             lblKullaniciAdi = new Label();
             lblSifre = new Label();
             lblUyari = new Label();
+            btnCikis = new Button();
             SuspendLayout();
             // 
             // txtKullaniciAdi
             // 
-            txtKullaniciAdi.Location = new Point(106, 94);
+            txtKullaniciAdi.Location = new Point(131, 63);
             txtKullaniciAdi.Name = "txtKullaniciAdi";
             txtKullaniciAdi.Size = new Size(100, 23);
             txtKullaniciAdi.TabIndex = 0;
-            txtKullaniciAdi.TextChanged += txtKullaniciAdi_TextChanged;
             // 
             // txtSifre
             // 
             txtSifre.Cursor = Cursors.IBeam;
-            txtSifre.Location = new Point(106, 141);
+            txtSifre.Location = new Point(131, 110);
             txtSifre.Name = "txtSifre";
             txtSifre.Size = new Size(100, 23);
             txtSifre.TabIndex = 1;
             txtSifre.UseSystemPasswordChar = true;
-            txtSifre.TextChanged += txtSifre_TextChanged;
             // 
             // btnGiris
             // 
-            btnGiris.Location = new Point(109, 180);
+            btnGiris.Location = new Point(156, 156);
             btnGiris.Name = "btnGiris";
             btnGiris.Size = new Size(75, 23);
             btnGiris.TabIndex = 2;
@@ -67,7 +66,7 @@
             // lblKullaniciAdi
             // 
             lblKullaniciAdi.AutoSize = true;
-            lblKullaniciAdi.Location = new Point(27, 97);
+            lblKullaniciAdi.Location = new Point(52, 66);
             lblKullaniciAdi.Name = "lblKullaniciAdi";
             lblKullaniciAdi.Size = new Size(73, 15);
             lblKullaniciAdi.TabIndex = 3;
@@ -76,7 +75,7 @@
             // lblSifre
             // 
             lblSifre.AutoSize = true;
-            lblSifre.Location = new Point(43, 144);
+            lblSifre.Location = new Point(68, 113);
             lblSifre.Name = "lblSifre";
             lblSifre.Size = new Size(30, 15);
             lblSifre.TabIndex = 4;
@@ -86,18 +85,29 @@
             // 
             lblUyari.AutoSize = true;
             lblUyari.ForeColor = Color.Red;
-            lblUyari.Location = new Point(109, 238);
+            lblUyari.Location = new Point(106, 221);
             lblUyari.Name = "lblUyari";
             lblUyari.Size = new Size(70, 15);
             lblUyari.TabIndex = 5;
             lblUyari.Text = "Hatalı Giriş !";
             lblUyari.Visible = false;
             // 
+            // btnCikis
+            // 
+            btnCikis.Location = new Point(52, 156);
+            btnCikis.Name = "btnCikis";
+            btnCikis.Size = new Size(75, 23);
+            btnCikis.TabIndex = 6;
+            btnCikis.Text = "Çıkış Yap";
+            btnCikis.UseVisualStyleBackColor = true;
+            btnCikis.Click += btnCikis_Click;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(304, 284);
+            ClientSize = new Size(270, 284);
+            Controls.Add(btnCikis);
             Controls.Add(lblUyari);
             Controls.Add(lblSifre);
             Controls.Add(lblKullaniciAdi);
@@ -122,5 +132,6 @@
         private Label lblKullaniciAdi;
         private Label lblSifre;
         private Label lblUyari;
+        private Button btnCikis;
     }
 }

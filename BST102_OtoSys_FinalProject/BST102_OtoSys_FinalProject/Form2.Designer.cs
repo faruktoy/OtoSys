@@ -44,6 +44,10 @@
             numUretimAdedi2 = new NumericUpDown();
             txtMaliyet2 = new NumericUpDown();
             cmbTur2 = new ComboBox();
+            dtpBitis2 = new DateTimePicker();
+            lblBitisTarihi2 = new Label();
+            lblBaslangicTarihi2 = new Label();
+            dtpBaslangic2 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)numUretimAdedi2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtMaliyet2).BeginInit();
             SuspendLayout();
@@ -135,7 +139,7 @@
             // 
             // btnGuncelle
             // 
-            btnGuncelle.Location = new Point(153, 261);
+            btnGuncelle.Location = new Point(153, 370);
             btnGuncelle.Name = "btnGuncelle";
             btnGuncelle.Size = new Size(84, 34);
             btnGuncelle.TabIndex = 13;
@@ -154,7 +158,7 @@
             // 
             // btnIptal2
             // 
-            btnIptal2.Location = new Point(21, 261);
+            btnIptal2.Location = new Point(21, 370);
             btnIptal2.Name = "btnIptal2";
             btnIptal2.Size = new Size(84, 34);
             btnIptal2.TabIndex = 15;
@@ -187,11 +191,48 @@
             cmbTur2.Size = new Size(130, 23);
             cmbTur2.TabIndex = 18;
             // 
+            // dtpBitis2
+            // 
+            dtpBitis2.Location = new Point(18, 314);
+            dtpBitis2.Name = "dtpBitis2";
+            dtpBitis2.ShowCheckBox = true;
+            dtpBitis2.Size = new Size(219, 23);
+            dtpBitis2.TabIndex = 22;
+            // 
+            // lblBitisTarihi2
+            // 
+            lblBitisTarihi2.AutoSize = true;
+            lblBitisTarihi2.Location = new Point(18, 296);
+            lblBitisTarihi2.Name = "lblBitisTarihi2";
+            lblBitisTarihi2.Size = new Size(59, 15);
+            lblBitisTarihi2.TabIndex = 21;
+            lblBitisTarihi2.Text = "Bitiş tarihi";
+            // 
+            // lblBaslangicTarihi2
+            // 
+            lblBaslangicTarihi2.AutoSize = true;
+            lblBaslangicTarihi2.Location = new Point(18, 236);
+            lblBaslangicTarihi2.Name = "lblBaslangicTarihi2";
+            lblBaslangicTarihi2.Size = new Size(87, 15);
+            lblBaslangicTarihi2.TabIndex = 19;
+            lblBaslangicTarihi2.Text = "Başlangıç tarihi";
+            // 
+            // dtpBaslangic2
+            // 
+            dtpBaslangic2.Location = new Point(18, 254);
+            dtpBaslangic2.Name = "dtpBaslangic2";
+            dtpBaslangic2.Size = new Size(219, 23);
+            dtpBaslangic2.TabIndex = 20;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(266, 316);
+            ClientSize = new Size(266, 426);
+            Controls.Add(dtpBitis2);
+            Controls.Add(lblBitisTarihi2);
+            Controls.Add(lblBaslangicTarihi2);
+            Controls.Add(dtpBaslangic2);
             Controls.Add(cmbTur2);
             Controls.Add(txtMaliyet2);
             Controls.Add(numUretimAdedi2);
@@ -235,5 +276,9 @@
         private NumericUpDown numUretimAdedi2;
         private NumericUpDown txtMaliyet2;
         private ComboBox cmbTur2;
+        private DateTimePicker dtpBitis2;
+        private Label lblBitisTarihi2;
+        private Label lblBaslangicTarihi2;
+        private DateTimePicker dtpBaslangic2;
     }
 }

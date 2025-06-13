@@ -19,8 +19,8 @@ namespace BST102_OtoSys_FinalProject
         {
             cmbTur.Items.Clear();
             cmbTur.Items.AddRange(new string[] {
-            "SUV", "Sedan", "Hatchback", "Pick-up", "Coupe",
-            "Cabrio", "Minivan", "MPV", "Station Wagon", "Panelvan", "Kamyonet"
+                "SUV", "Sedan", "Hatchback", "Pick-up", "Coupe",
+                "Cabrio", "Minivan", "MPV", "Station Wagon", "Panelvan", "Kamyonet"
             });
             cmbTur.SelectedIndex = 0;
             txtPart.Text = db.UretimSeriNoGetir();
@@ -51,8 +51,7 @@ namespace BST102_OtoSys_FinalProject
                 UretimBitisTarihi = dtpBitis.Checked ? dtpBitis.Value : (DateTime?)null,
                 MaliyetTutari = Convert.ToDecimal(txtMaliyet.Text),
                 SatisDurumu = chkSatildimi.Checked ? 0 : 1,
-                UretimAdedi = (int)numUretimAdedi.Value,
-
+                UretimAdedi = (int)numUretimAdedi.Value
             };
 
             bool sonuc = db.AracEkle(yeniArac);
@@ -86,7 +85,7 @@ namespace BST102_OtoSys_FinalProject
             if (dgvAraclar.SelectedRows.Count > 0)
             {
                 int secilenId = Convert.ToInt32(dgvAraclar.SelectedRows[0].Cells["AracId"].Value);
-                DialogResult result = MessageBox.Show("Bu aracı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Bu araçı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     db.AracSil(secilenId);
@@ -109,13 +108,18 @@ namespace BST102_OtoSys_FinalProject
                 {
                     Arac secilen = new Arac
                     {
+                        AracId = Convert.ToInt32(rowView["AracId"]),
                         UretimSeriNo = rowView["UretimSeriNo"].ToString(),
                         Tur = rowView["Tur"].ToString(),
                         Marka = rowView["Marka"].ToString(),
                         Model = rowView["Model"].ToString(),
                         UretimAdedi = Convert.ToInt32(rowView["UretimAdedi"]),
                         MaliyetTutari = Convert.ToDecimal(rowView["MaliyetTutari"]),
-                        SatisDurumu = Convert.ToInt32(rowView["SatisDurumu"])
+                        SatisDurumu = Convert.ToInt32(rowView["SatisDurumu"]),
+                        UretimBaslangicTarihi = Convert.ToDateTime(rowView["UretimBaslangicTarihi"]),
+                        UretimBitisTarihi = rowView["UretimBitisTarihi"] != DBNull.Value
+                            ? Convert.ToDateTime(rowView["UretimBitisTarihi"])
+                            : (DateTime?)null
                     };
 
                     Form2 frm = new Form2(secilen);
@@ -131,17 +135,20 @@ namespace BST102_OtoSys_FinalProject
             }
         }
 
-        public void UpdateArac(string id, string yeniTur, string yeniMarka, string yeniModel, int yeniAdet, decimal yeniMaliyet, bool satildiMi)
+        public void UpdateArac(int aracId, string id, string yeniTur, string yeniMarka, string yeniModel, int yeniAdet, decimal yeniMaliyet, bool satildiMi, DateTime ubt, DateTime? ubit)
         {
             Arac guncellenen = new Arac
             {
+                AracId = aracId,
                 UretimSeriNo = id,
                 Tur = yeniTur,
                 Marka = yeniMarka,
                 Model = yeniModel,
                 UretimAdedi = yeniAdet,
                 MaliyetTutari = yeniMaliyet,
-                SatisDurumu = satildiMi ? 0 : 1
+                SatisDurumu = satildiMi ? 0 : 1,
+                UretimBaslangicTarihi = ubt,
+                UretimBitisTarihi = ubit
             };
 
             db.AracGuncelle(guncellenen);
@@ -174,14 +181,12 @@ namespace BST102_OtoSys_FinalProject
             lblSatilanMaliyet.Text = toplamSatilanMaliyet.ToString("C2");
         }
 
-        private void lblToplamAdet_Click(object sender, EventArgs e)
-        {
-            // Boş bırakıldı
-        }
+        private void lblToplamAdet_Click(object sender, EventArgs e) { }
+        private void dgvAraclar_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
-        private void dgvAraclar_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnTemizle_Click(object sender, EventArgs e)
         {
-
+            Temizle();
         }
 
     }

@@ -11,7 +11,7 @@ namespace BST102_OtoSys_FinalProject
         {
             Application.EnableVisualStyles();                    // Görsel temayý etkinleþtirir
             Application.SetCompatibleTextRenderingDefault(false); // Varsayýlan yazý biçimini kullanýr
-            Application.Run(new Form1());                         // Form1 arayüzü baþlatýlýr
+            Application.Run(new LoginForm());                         // Form1 arayüzü baþlatýlýr
         }
     }
 }

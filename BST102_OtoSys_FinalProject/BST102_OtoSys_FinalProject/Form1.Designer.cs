@@ -52,10 +52,12 @@
             btnTemizle = new Button();
             chkSatildimi = new CheckBox();
             label1 = new Label();
-            groupBox2 = new GroupBox();
             lblToplamUretim = new Label();
             lblToplamMaliyet = new Label();
             lblSatilanMaliyet = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvAraclar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUretimAdedi).BeginInit();
             groupBox1.SuspendLayout();
@@ -273,6 +275,7 @@
             btnTemizle.TabIndex = 22;
             btnTemizle.Text = "Temizle";
             btnTemizle.UseVisualStyleBackColor = true;
+            btnTemizle.Click += btnTemizle_Click;
             // 
             // chkSatildimi
             // 
@@ -292,19 +295,10 @@
             label1.TabIndex = 20;
             label1.Text = "Satıldı mı :";
             // 
-            // groupBox2
-            // 
-            groupBox2.Location = new Point(12, 604);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1307, 107);
-            groupBox2.TabIndex = 21;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Filtreleme";
-            // 
             // lblToplamUretim
             // 
             lblToplamUretim.AutoSize = true;
-            lblToplamUretim.Location = new Point(132, 574);
+            lblToplamUretim.Location = new Point(465, 580);
             lblToplamUretim.Name = "lblToplamUretim";
             lblToplamUretim.Size = new Size(96, 15);
             lblToplamUretim.TabIndex = 22;
@@ -313,7 +307,7 @@
             // lblToplamMaliyet
             // 
             lblToplamMaliyet.AutoSize = true;
-            lblToplamMaliyet.Location = new Point(550, 574);
+            lblToplamMaliyet.Location = new Point(883, 580);
             lblToplamMaliyet.Name = "lblToplamMaliyet";
             lblToplamMaliyet.Size = new Size(99, 15);
             lblToplamMaliyet.TabIndex = 23;
@@ -322,22 +316,51 @@
             // lblSatilanMaliyet
             // 
             lblSatilanMaliyet.AutoSize = true;
-            lblSatilanMaliyet.Location = new Point(978, 574);
+            lblSatilanMaliyet.Location = new Point(1311, 580);
             lblSatilanMaliyet.Name = "lblSatilanMaliyet";
             lblSatilanMaliyet.Size = new Size(94, 15);
             lblSatilanMaliyet.TabIndex = 24;
             lblSatilanMaliyet.Text = "lblSatilanMaliyet";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(1212, 580);
+            label2.Name = "label2";
+            label2.Size = new Size(93, 15);
+            label2.TabIndex = 27;
+            label2.Text = "Satılan Maliyet : ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(779, 580);
+            label3.Name = "label3";
+            label3.Size = new Size(98, 15);
+            label3.TabIndex = 26;
+            label3.Text = "Toplam Maliyet : ";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(364, 580);
+            label4.Name = "label4";
+            label4.Size = new Size(95, 15);
+            label4.TabIndex = 25;
+            label4.Text = "Toplam Üretim : ";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1417, 723);
+            ClientSize = new Size(1417, 614);
+            Controls.Add(label2);
+            Controls.Add(label3);
+            Controls.Add(label4);
             Controls.Add(lblSatilanMaliyet);
             Controls.Add(lblToplamMaliyet);
             Controls.Add(btnSil);
             Controls.Add(lblToplamUretim);
-            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(btnForm2);
             Controls.Add(dgvAraclar);
@@ -375,7 +398,6 @@
         private NumericUpDown numUretimAdedi;
         private Label lblUretimAdedi;
         private GroupBox groupBox1;
-        private GroupBox groupBox2;
         private Label label1;
         private CheckBox chkSatildimi;
         private Label lblToplamUretim;
@@ -383,5 +405,8 @@
         private Label lblSatilanMaliyet;
         private Button btnTemizle;
         private NumericUpDown txtMaliyet;
+        private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }
