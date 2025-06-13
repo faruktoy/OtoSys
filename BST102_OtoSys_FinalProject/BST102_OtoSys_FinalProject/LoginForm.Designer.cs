@@ -42,6 +42,7 @@
             txtKullaniciAdi.Name = "txtKullaniciAdi";
             txtKullaniciAdi.Size = new Size(100, 23);
             txtKullaniciAdi.TabIndex = 0;
+            txtKullaniciAdi.TextChanged += txtKullaniciAdi_TextChanged;
             // 
             // txtSifre
             // 
@@ -51,6 +52,7 @@
             txtSifre.Size = new Size(100, 23);
             txtSifre.TabIndex = 1;
             txtSifre.UseSystemPasswordChar = true;
+            txtSifre.TextChanged += txtSifre_TextChanged;
             // 
             // btnGiris
             // 
@@ -60,6 +62,7 @@
             btnGiris.TabIndex = 2;
             btnGiris.Text = "Giriş yap";
             btnGiris.UseVisualStyleBackColor = true;
+            btnGiris.Click += btnGiris_Click;
             // 
             // lblKullaniciAdi
             // 
